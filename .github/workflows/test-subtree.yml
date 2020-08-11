@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Sync Subtrees
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test1:
+    steps:
+      - name: Subtree Sync
+        uses: xedi/action-subtree-sync@1.0.0
+        with:
+          # Full name of the subtree repository (e.g. owner/repository)
+          subtree: coding-octopus/test-monorepo-sub
+          # Deploy key for the subtree repository
+          subtree_deploy_key: ${{ secrets.test1_deploy_key }}
+          # Prefix for the split
+          split_prefix: sub
