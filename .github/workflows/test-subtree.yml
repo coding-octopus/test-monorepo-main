@@ -12,7 +12,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
   test1:
+    runs-on: ubuntu-latest
+    needs: checkout
     steps:
       - name: Subtree Sync
         uses: xedi/action-subtree-sync@1.0.0
@@ -23,3 +30,4 @@ jobs:
           subtree_deploy_key: ${{ secrets.test1_deploy_key }}
           # Prefix for the split
           split_prefix: sub
+
